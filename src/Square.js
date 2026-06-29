@@ -1,5 +1,5 @@
 import { useState } from "react";
-
+import './Styles/board.css'
 const Square = ({value,onSquareClick}) =>{
 
 return(
