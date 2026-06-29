@@ -1,7 +1,8 @@
 import Square from "./Square"
 import { useState } from "react"
+import './Styles/game.css'
 
-const Board = ({xIsNext,squares,onPlay})=>{
+const Board = ({xIsNext,squares,onPlay,restartGame})=>{
  
   // creates an array with nine elements and sets each of them to null
   //[null,null,null,null,null,null,null,null,null]
@@ -12,6 +13,7 @@ const Board = ({xIsNext,squares,onPlay})=>{
     nextSquares[i] = xIsNext? "X": "O"
     onPlay(nextSquares)
   }
+
 
 
 const calculateWinner= (squares) =>{
@@ -36,6 +38,7 @@ const calculateWinner= (squares) =>{
 
 
   const winner = calculateWinner(squares);
+  const isDraw = !winner && squares.every(square => square !== null);
   const status = winner? "Winner: " + winner: "Next player: " + (xIsNext ? "X" : "O");
   return (
         <>
@@ -57,6 +60,10 @@ const calculateWinner= (squares) =>{
        <Square value={squares[8]} onSquareClick={()=>handleClick(8)}/>
         
       </div>
+      {(winner || isDraw)&&
+      
+      <button className="button" onClick={restartGame}>Restart?</button>
+}
     </>
   )
 }

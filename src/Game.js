@@ -17,7 +17,10 @@ const Game = () =>{
     const jumpTo = (nextMove) =>{
           setCurrentMove(nextMove);
     }
-
+   const restartGame= () =>{        
+  setHistory([Array(9).fill(null)]);
+   setCurrentMove(0);
+}
     const moves = history.map((squares, move) => {
       let description = move > 0 ? 
       'Go to move #' + move : 
@@ -33,7 +36,8 @@ const Game = () =>{
       <div className="game-board">
          <Board xIsNext={xIsNext} 
          squares={currentSquares} 
-         onPlay={handlePlay} />
+         onPlay={handlePlay} 
+         restartGame={restartGame}/>
       </div>
       <div className="game-info">
         <ol>{moves}</ol>
